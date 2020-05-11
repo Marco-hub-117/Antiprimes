@@ -7,12 +7,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 
 /**
  * The application window.
  */
-public class MainWindow extends JFrame {
+@SuppressWarnings("deprecation")
+public class MainWindow extends JFrame implements Observer {
 
     private AntiPrimesSequence sequence;
     private DefaultListModel display = new DefaultListModel();
@@ -73,4 +76,15 @@ public class MainWindow extends JFrame {
         for (Number n : sequence.getLastK(SHOW_LAST))
             display.add(0, "" + n.getValue() + " (" + n.getDivisors() + ")");
     }
+
+	@Override
+	public void update(Observable o, Object arg) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				updateDisplay();	
+			}
+		});
+		
+	}
 }
