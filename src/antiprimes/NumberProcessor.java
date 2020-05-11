@@ -1,5 +1,9 @@
 package antiprimes;
 
-public class NumberProcessor {
+import java.util.logging.Logger;
+
+public class NumberProcessor extends Thread {
+	
+
 
 }
